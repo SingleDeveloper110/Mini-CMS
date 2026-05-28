@@ -1,7 +1,11 @@
 <?php
 require_once("config.php");
-include('assets/partition/header.php');
-include('assets/partition/content.php');
-include('assets/partition/footer.php');
+require_once("check.php");
+include_once('assets/partition/header.php');
+include_once('assets/partition/box.php');
+include_once('assets/partition/decription.php');
+include_once('assets/partition/some_posts.php');
+include_once('assets/partition/footer.php');
+
 
 

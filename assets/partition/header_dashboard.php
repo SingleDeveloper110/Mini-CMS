@@ -14,10 +14,10 @@
 
         <div class="">
             <ul class="flex  justify-center gap-5 flex-wrap">
-                <li><a href="/dashboard.php"><?php echo isset($_SESSION['admin']) ? "Dashboard" : ""; ?></a></li>
-                <li><a href="<?php echo "https://" . URL_SITE; ?>">Home</a></li>
-                <li><a href="?about=true">About us</a></li>
-                <li><a href="?show_posts=true">Posts</a></li>
+            
+                <li><a href="<?php echo "https://" . URL_SITE; ?>">Visit Web</a></li>
+                <li><a href="?create_post=true">Create Post</a></li>
+               
 
             </ul>
         </div>

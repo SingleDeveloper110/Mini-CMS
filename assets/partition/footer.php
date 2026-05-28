@@ -1,11 +1,14 @@
-<div class=" static  w-full flex justify-around items-center h-30  bg-[#D2C1B6]">
-<div>
-    Some Text About Site
+<div class=" static  w-full flex justify-around items-center h-auto  bg-[#D2C1B6]">
+<div class="w-50">
+    This template created for Mini-CMS Projrct .
+    It is a very simple tepmlete.
 </div>    
 
-
-<div>
-In Social Media
+<div >
+<h3>Instagram is <a href="" class="text-blue-600">HERE</a></h3>
+<h3>Twitter (X) is <a href="" class="text-blue-600">HERE</a></h3>
+<h3>Telegram is <a href="" class="text-blue-600">HERE</a></h3>
+<h3>Whatsapp is <a href="" class="text-blue-600">HERE</a></h3>
 </div>
 
 <div class="">
