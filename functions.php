@@ -9,13 +9,13 @@ function include_page_verify($url_verify, $value_verify, $page_path, $header_foo
             exit;
 
         }
-    }else{
+    } else {
         if (isset($_GET["$url_verify"]) && $_GET["$url_verify"] == "$value_verify") {
             include("$page_path");
-         
+
             exit;
 
-        } 
+        }
     }
 
 }
@@ -51,7 +51,7 @@ function check($name, $btn, $value_btn, $method)
     }
 }
 
-function save_data($filename, $ext, $nametosave, $path,$post_title,$post_desc)
+function save_data($filename, $ext, $nametosave, $path, $post_title, $post_desc)
 {
 
     $filename = $_FILES["image"]["tmp_name"];
@@ -71,9 +71,10 @@ function save_data($filename, $ext, $nametosave, $path,$post_title,$post_desc)
         strval($path . "/") . $nametosave
     );
 
-    if(!add_post($post_title, $post_desc, $path."/" . $nametosave)){
+    if (!add_post($post_title, $post_desc, $path . "/" . $nametosave)) {
         return false;
-    };
+    }
+    ;
 
 
 }
@@ -97,6 +98,7 @@ function random_str($length)
 function connect_db()
 {
     $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
     return $db;
 
 }
@@ -108,35 +110,35 @@ function select_all($val)
     return mysqli_fetch_all($select, MYSQLI_ASSOC);
 
 }
-function add_post($post_title,$post_desc,$post_image)
+function add_post($post_title, $post_desc, $post_image)
 {
     $db = connect_db();
 
-    $select = mysqli_query($db, "INSERT INTO `posts`(`ID`, `user_id`, `post_title`, `post_desc`, `post_image`) VALUES (NULL,NULL,'$post_title','$post_desc','$post_image')");
-    
+    $select = mysqli_query($db, "INSERT INTO `posts`(`ID`, `post_title`, `post_desc`, `post_image`) VALUES (NULL,'$post_title','$post_desc','$post_image')");
+
     return 'true';
 
 }
 
-function show_posts ($limit="")
-{  
-      $db = connect_db();
+function show_posts($limit = "")
+{
+    $db = connect_db();
 
-    if($limit==""){
+    if ($limit == "") {
 
-        $query= mysqli_query($db, "SELECT * FROM `posts`");
-        return mysqli_fetch_all($query,MYSQLI_ASSOC);
-    }
-    else{
+        $query = mysqli_query($db, "SELECT * FROM `posts`");
+        return mysqli_fetch_all($query, MYSQLI_ASSOC);
+    } else {
         $limit_val = intval($limit);
         $query = mysqli_query($db, "SELECT * FROM `posts` limit $limit_val ");
-        return mysqli_fetch_all( $query, MYSQLI_ASSOC);
+        return mysqli_fetch_all($query, MYSQLI_ASSOC);
     }
 
-    
+
 
 }
-function show_a_post($id){
+function show_a_post($id)
+{
     $db = connect_db();
     $id = strval($id);
     $query = mysqli_query($db, "SELECT * FROM `posts` WHERE md5(ID) ='$id' ;");
@@ -147,6 +149,50 @@ function static_str()
     return "zc=hTat4>M9m8Cxjnp.SQkot9oW@GJ";
 }
 
+function check_uniq_user(string $username)
+{
+    $db = connect_db();
 
+    $check_uniq = mysqli_query($db, "SELECT * FROM `users` WHERE `username` = '$username' ");
+    return mysqli_fetch_row($check_uniq);
+
+
+}
+
+function add_user(string $username, string $password)
+{
+    $db = connect_db();
+
+    $password = md5($password) . static_str();
+    $user = check_uniq_user("$username");
+    
+    
+    if ($user[1] == $username) {
+
+        exit;
+       
+
+        // CHECK  THIS 
+    } else {
+        $select = mysqli_query($db, "INSERT INTO `users`(`ID`, `username`,`password`) VALUES (NULL,'$username','$password')");
+
+
+        return "SUCCESS";
+
+        exit;
+    };
+
+
+
+}
+
+function get_user_id($username){
+    $db = connect_db();
+
+    $uid = mysqli_query($db, "SELECT * FROM `users` WHERE `username` = '$username' ");
+    return mysqli_fetch_all($uid, MYSQLI_ASSOC);
+
+
+}
 
 
